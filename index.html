@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript</title>
+  <link rel="stylesheet" href="./assets/css/main.css">
+
+</head>
+
+<body>
+  <div class="main">
+    <form id="form-1" action="" method="POST" class="form">
+      <h3 class="heading"> Đăng kí</h3>
+      <p class="desc">Hello lại là Chao đây </p>
+      <div class="spacer"></div>
+      <div class="form-group">
+        <label for="fullname" class="form-label">Tên đầy đủ</label>
+        <input id="fullname" name="fullname" type="text" class="form-input" placeholder="VD: Mai Ngọc Ánh">
+
+        <span class="form-message"></span>
+
+      </div>
+      <div class="form-group">
+
+        <label for="email" class="form-label">Email</label>
+        <input id="email" name="email" type="text" class="form-input" placeholder="VD: anhsatthu34@gmail.com">
+        <span class="form-message"></span>
+      </div>
+      <div class="form-group">
+        <label for="password" class="form-label">Mật khẩu</label>
+        <input id="password" name="password" type="password" class="form-input" placeholder="VD: Mật khẩu">
+        <span class="form-message"></span>
+      </div>
+   
+      <div class="form-group">
+        <label for="re-password" class="form-label">Nhập lại mật khẩu</label>
+        <input id="re-password" name="re-password" type="password" class="form-input"
+          placeholder="VD: Nhập lại Mật khẩu">
+        <span class="form-message"></span>
+      </div>
+      <div class="form-group">
+        <label for="province" class="form-label">Tỉnh thành</label>
+        
+        <select name="province"  class="form-input form-select">
+          <option  value="">Chọn thành phố</option>
+          <option  value="NamDinh">Nam Định</option>
+          <option  value="HaNoi">Hà Nội</option>
+        </select>
+        
+        <span class="form-message"></span>
+      </div>
+      <div class="form-group">
+
+        <label for="radio" class="form-label">Giới tính</label>
+
+        <div class="horizonal">
+
+          <div class="form-gender">
+            <input name="gender" type="radio" value="male">
+            Nam
+          </div>
+          <div class="form-gender">
+            <input name="gender" type="radio" value="female">
+            Nữ
+          </div>
+          <div class="form-gender">
+            <input name="gender" type="radio" value="other">
+            LGBT
+          </div>
+        </div>
+        <span class="form-message"></span>
+      </div>
+      <div class="form-group">
+
+        <label for="checkbox" class="form-label">Mức độ đẹp trai</label>
+
+        <div class="horizonal">
+
+          <div class="form-checkbox">
+            <input name="charactor" type="checkbox" value="handsome" class="form-input">
+            Đẹp trai
+          </div>
+          <div class="form-checkbox">
+            <input name="charactor" type="checkbox" value="friendly" class="form-input">
+           Thân thiện
+          </div>
+          <div class="form-checkbox">
+            <input name="charactor" type="checkbox" value="cute" class="form-input">
+            Cute
+          </div>
+        </div>
+        <span class="form-message"></span>
+      </div>
+
+      <button class="form-submit">Đăng ký</button>
+    </form>
+  </div>
+  <script src="./validator.js"></script>
+  <script>
+    Validator({
+      form: '#form-1',
+      errorSelector: '.form-message',
+      formGroupSelector: '.form-group',
+      rules: [
+        Validator.isRequired('#fullname'),
+        Validator.isRequired('.form-select'),
+        Validator.isRequired('#email'),
+        Validator.isEmail('#email'),
+        Validator.isRequired('#password'),
+        Validator.minLength('#password', 6),
+        Validator.isRequired('#re-password'),
+        Validator.checkPassword('#re-password', function () {
+          return document.querySelector('#form-1 #password').value;
+        }, 'Mật khẩu không trùng khớp'),
+        Validator.isRequired('input[name="gender"]'), 
+     
+      ],
+      onSubmit: function (data) {
+        console.log(data);
+      }
+    });
+  </script>
+</body>
+
+</html>
